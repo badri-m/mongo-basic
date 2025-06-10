@@ -1,19 +1,51 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mongo DB</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>welcome to mongo db</h1>
     {{message}}
+    <br />
+    {{#if edit_id}}
+      <h2>edit</h2>
+      <form action="/update_players" method="POST">
+        <input type="hidden" name="edit_id" value="{{edit_id}}" />
+        <label for="name">name</label>
+        <input type="text" name="name" value="{{edit_players.name}}" />
+        <label for="age">age</label>
+        <input type="number" name="age" value="{{edit_players.age}}" />
+        <button type="submit">submit</button>
+      </form>
+      <br />
+      <br />
+    {{else}}
 
+      <h2>input</h2>
+      <form method="post" action="/store_players">
+        <label for="name">name</label>
+        <input type="text" name="name" />
+        <label for="age">age</label>
+        <input type="numbers" name="age" />
+        <button type="submit">submit</button>
+      </form>
+      <br />
+      <br />
+    {{/if}}
     <ul>
-        >
-        {{#each players}}
-        <li>{{this.name}} | {{this.age}}</li>
-        {{/each}}
+      {{#each players}}
+        <li>{{this.name}}
+          |
+          {{this.age}}
+          |
+          <a href="/?edit_id={{this._id}}">edit</a>
+          |
+          <a
+            href="/?delete_id={{this._id}}"
+            onclick="return confirm('pannuma da')"
+          >delete</a></li>
+      {{/each}}
     </ul>
-</body>
+  </body>
 </html>
