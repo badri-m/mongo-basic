@@ -55,6 +55,7 @@ app.get("/", async (req, res) => {
   }
   res.render("main", { message, players, edit_id, edit_players });
 });
+
 app.post("/store_players", async (req, res) => {
   let database = await dbo.getdatabase();
   const collection = database.collection("players");
@@ -74,7 +75,7 @@ app.post("/update_players", async (req, res) => {
     age: req.body.age,
   };
   let edit_id = req.body.edit_id;
-  console.log("Edit ID:", edit_id); // Debug line
+  console.log("Edit ID:", edit_id); 
   if (!edit_id) {
     return res.redirect("/?status=error");
   }
